@@ -1,0 +1,60 @@
+/*CSS Reset*/
+
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/*Custom CSS classes*/
+
+.c-w-30 {
+	width: 30vw;
+}
+
+.c-h-400 {
+	height: 400px ;
+}
+
+.c-h-200 {
+	size: 200px;
+}
+
+.c-dimension-400x400 {
+	height: 400px;
+	width: 400px;
+}
+
+.f-robS {
+	font-family: 'Roboto Slab', serif;
+}
+
+.f-robC {
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+.mapouter {
+	position:relative;
+	text-align:right;
+	width:100%;
+	height:400px;
+}
+.gmap_canvas {
+	overflow:hidden;
+	background:none;
+	width:100%;
+	height:400px;
+}
+.gmap_iframe {
+	width:400px;
+	height:400px;
+}
+
+.no-overflow {
+	overflow: hidden;
+}
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;    
+}
