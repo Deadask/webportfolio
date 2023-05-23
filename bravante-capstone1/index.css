@@ -58,3 +58,7 @@ html, body {
     max-width: 100%;
     overflow-x: hidden;    
 }
+
+.def-color {
+	color: #c9d5f8;
+}

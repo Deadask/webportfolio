@@ -14,59 +14,62 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto+Slab&display=swap" rel="stylesheet">
+	<!-- font awsome -->
+	<script src="https://kit.fontawesome.com/c727f95a65.js" crossorigin="anonymous"></script>
 
 
 </head>
 
-<body class="">
+<body class="bg-secondary ">
+	<!-- navbar section start -->				
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark text-center sticky-top">
+				<div class="container-fluid">
+					<div class="d-flex flex-row justify-content-center">
+					  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+					    <span class="navbar-toggler-icon"></span>
+					  </button>
+						<div class="collapse navbar-collapse" id="navbarNavDropdown">
+						    <ul class="navbar-nav ml-auto">
+						      <li class="nav-item ">
+						        <a class="nav-link" href="#projects">Projects</a>
+						      </li>
+						      <li class="nav-item ">
+						        <a class="nav-link" href="#landing">Home</a>
+						      </li>
+						    </ul>
+						</div>
+					      <a class="navbar-brand mx-auto p-3" href="#aboutMe">Angelico</a>
+					  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+					    <ul class="navbar-nav mr-auto">
+					      <li class="nav-item ">
+					        <a class="nav-link" href="#tools">Tools</a>
+					      </li>
+					      <li class="nav-item">
+					        <a class="nav-link" href="#contact">Contact</a>
+					      </li>		  
+					    </ul>
+				    </div>
+
+				  </div>
+				</div>
+			</nav>				
+	<!-- navbar section end -->
+
 
 	<!-- Capstone body Start -->
-	<div id="capstone" class="bg-secondary no-sidescroll">
-		<!-- navbar section start -->				
-				<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top text-center ">
-					<div class="container-fluid">
-						<div class="d-flex flex-row justify-content-center">
-						  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-						    <span class="navbar-toggler-icon"></span>
-						  </button>
-							<div class="collapse navbar-collapse" id="navbarNavDropdown">
-							    <ul class="navbar-nav ml-auto">
-							      <li class="nav-item ">
-							        <a class="nav-link" href="#projects">Projects</a>
-							      </li>
-							      <li class="nav-item ">
-							        <a class="nav-link" href="#landing">Home</a>
-							      </li>
-							    </ul>
-							</div>
-						      <a class="navbar-brand mx-auto p-3" href="#aboutMe">Angelico</a>
-						  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-						    <ul class="navbar-nav mr-auto">
-						      <li class="nav-item ">
-						        <a class="nav-link" href="#">Tools</a>
-						      </li>
-						      <li class="nav-item">
-						        <a class="nav-link" href="#">Contact</a>
-						      </li>		  
-						    </ul>
-					    </div>
-
-					  </div>
-					</div>
-				</nav>				
-		<!-- navbar section end -->
-
+	<div id="capstone" class="no-sidescroll">
+		
 		<!-- Landing page Start -->
 			<div id="landing" class="min-vh-100">
 			
 
 			<!-- Welcome Section Start -->
-				<div id="aboutMe" class="text-center">
+				<div id="aboutMe" class="text-center mt-5">
 					<img src="./images/me.jpg" class="rounded-circle image-fluid">
-					<h3 class="f-robS">Angelico Errelle Bravante</h3>
-					<h4 class="f-robC">Full-Stack Web Developer</h4>
+					<h3 class="f-robS mt-3">Angelico Errelle Bravante</h3>
+					<h4 class="f-robC mt-3">Full-Stack Web Developer</h4>
 					<div class="row mt-5">
-						<p class=" text-center mx-auto col-lg-6 col-12">Hi, I'm Angelico! I'm a full-stack web developer who loves to learn new things. I was born and raised in Silang, Cavite, and graduated with a degree in Computer Engineering in 2020. I started learning web development in May 2023 with Zuitt Coding Bootcamp.
+						<p class=" text-center mx-auto col-lg-6 col-12 f-robC h5">Hi, I'm Angelico! I'm a full-stack web developer who loves to learn new things. I was born and raised in Silang, Cavite, and graduated with a degree in Computer Engineering in 2020. I started learning web development in May 2023 with Zuitt Coding Bootcamp.
 
 						Before I started learning web development, I worked as a customer service representative for a few years. I didn't get to use my programming skills in those jobs, but I'm glad I had the opportunity to learn about customer service. It has taught me how to be patient, understanding.
 
@@ -79,7 +82,7 @@
 		<!-- Landing page end -->
 
 		<!--Projects Section Start -->
-				<div class="bg-white text-light text-center min-vh-100 p-5">
+				<div id="projects" class="bg-white text-light text-center min-vh-100 p-5">
 					<h2 class="mb-3 text-dark">Projects</h2>
 					<div class="d-lg-flex justify-content-center p-md-5 row">
 
@@ -131,42 +134,86 @@
 				</div>
 		<!--Projects Section End -->
 
+		<!-- Tools Section Start -->
+			<div id="tools" class="text-center">
+			    <!-- Core Tools Section Start -->
+			    <h3 class="font-weight-bold text-uppercase f-robC">Core Tools</h3>
+
+			    <div class="container-fluid text-center">
+			        <div>
+			            <img width="150" src="images/logo-html5.png"/>
+			        </div>
+			        <div>
+			            <img width="150" src="images/logo-css3.png"/>
+			            <img width="150" src="images/logo-javascript.png"/>
+			        </div>
+			    </div>
+			    <!-- Core Tools Section End -->
+			    
+			    <!-- Other Tools Section Start -->
+			    <h3 class="font-weight-bold text-uppercase f-robC">Other Tools</h3>
+
+			    <div class="container-fluid">
+			            <div  class="d-inline-flex flex-column d-sm-block justify-content-start justify-content-sm-around">
+			                <img width="150" src="images/logo-mongodb.png"/>
+			                <img width="150" src="images/logo-nodejs.png"/>
+			                <img width="150" src="images/logo-expressjs.png"/>
+			                <img width="150" src="images/logo-react.png"/>
+			                <img width="150" src="images/logo-heroku.png"/>
+			            </div>
+			            <div class="d-inline-flex flex-column d-sm-block justify-content-end justify-content-sm-around">
+			                <img width="150" src="images/logo-git.png"/>
+			                <img width="150" src="images/logo-sublime-text-3.png"/>
+			                <img width="150" src="images/logo-postman.png"/>
+			                <img width="150" src="images/logo-gitlab-ci-cd.png"/>
+			            </div>
+			     </div>
+			    <!-- Other Tools Section End -->
+			    
+			</div>
+		<!-- Tools Section End -->
+
 
 		<!-- Contact page Start -->
-			<div id="contact" class="min-vh-100">
-				<div class="container-fluid text-center">
-					<h2 class="text-ligh mt-3">Contact Me</h2>
-					<div class="container mt-5 bg-secondary p-3"> 
-						
-						 
+			<div id="contact" class="min-vh-60">
+				<div class="container-fluid text-center bg-dark rounded-lg">
+					<h2 class="text-light mt-3 py-3">Contact Me</h2>
+					<div class="container">
+						<div class="d-flex flex-row justify-content-around">
+							<span><a href="https://www.facebook.com/crow.serizawa"><i class="fa-brands fa-square-facebook fa-2xl def-color"></i></a></span>
+							<span><a href="https://www.linkedin.com/in/angelico-errelle-bravante-05343a190/"><i class="fa-brands fa-linkedin fa-2xl def-color"></i></a></span>
+							<span><a href="https://www.onlinejobs.ph/jobseekers/info/2673171"><i class="fa-solid fa-globe fa-2xl def-color"></i></a></span>
+						</div>
+					</div>
+					<div class="container mt-5 p-3 text-light "> 						 
 						  <div class="row mt-2"> 
-						    <div class="card bg-primary col-sm-12 col-md-12 col-xl-4 ml-auto">
+						    <div class="col-sm-12 col-md-12 col-xl-4 ml-auto">
 						      <form >
-						                <!-- Inpute Group Starts -->
-						        <div>
-						          <div class="form-group">
+						                <!-- Input Group Starts -->
+						        <div class="">
+						          <div class="form-group row">
 						            <label for="Name1">Name</label>
 						            <input type="Name" class="form-control" id="Name1" placeholder="Juan Dela Cruz">
 						          </div>
-						          <div class="form-group">
+						          <div class="form-group row">
 						            <label for="exampleFormControlInput1">Email address</label>
 						            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="JuanDela@gmail">
-						          </div>  <div class="form-group">
+						          </div>  <div class="form-group row">
 						            <label for="contact-number">Contact Number</label>
-						            <input type="contact-number" class="form-control" id="contact-number" placeholder="+63999564565">
+						            <input type="contact-number" class="form-control" id="contact-number" placeholder="+6391234567">
 						          </div>
 						        </div> 
 						        <!-- Input Group ends -->      
 						        <!-- Message area -->
 						        <div>
-						          <div class="form-group">
+						          <div class="form-group row">
 						            <label for="Message1">Message</label>
 						            <textarea class="form-control" id="Message1" rows="5"></textarea>
 						          </div>
 						        </div>  
 						        <!-- Message area Ends -->
 						        <!-- submit buttons starts -->
-						       <button type="button" class="btn btn-dark text-light" data-toggle="modal" data-target="#staticBackdrop">
+						       <button type="button" class="btn btn-secondary text-light" data-toggle="modal" data-target="#staticBackdrop">
 						         Send Email
 						       </button>
 
@@ -175,7 +222,7 @@
 						    </div>
 
 						    <!-- map section -->
-						    <div class="col-sm-12 col-md-12 col-xl-4 min-vh-50 mr-lg-auto ">
+						    <div class="col-sm-12 col-md-12 col-xl-4 min-vh-50 mr-lg-auto pt-4">
 
 						    	<div class="mapouter">
 						    		<div class="gmap_canvas">
@@ -221,45 +268,7 @@
 			</div>
 		<!-- Contact page End -->
 
-		<!-- Tools Section Start -->
-		<div class="text-center">
-
-		    <!-- Core Tools Section Start -->
-		    <h3 class="font-weight-bold text-uppercase f-robC">Core Tools</h3>
-
-		    <div class="container-fluid text-center">
-		        <div>
-		            <img width="150" src="images/logo-html5.png"/>
-		        </div>
-		        <div>
-		            <img width="150" src="images/logo-css3.png"/>
-		            <img width="150" src="images/logo-javascript.png"/>
-		        </div>
-		    </div>
-		    <!-- Core Tools Section End -->
-		    
-		    <!-- Other Tools Section Start -->
-		    <h3 class="font-weight-bold text-uppercase f-robC">Other Tools</h3>
-
-		    <div class="container-fluid">
-		            <div  class="d-inline-flex flex-column d-sm-block justify-content-start justify-content-sm-around">
-		                <img width="150" src="images/logo-mongodb.png"/>
-		                <img width="150" src="images/logo-nodejs.png"/>
-		                <img width="150" src="images/logo-expressjs.png"/>
-		                <img width="150" src="images/logo-react.png"/>
-		                <img width="150" src="images/logo-heroku.png"/>
-		            </div>
-		            <div class="d-inline-flex flex-column d-sm-block justify-content-end justify-content-sm-around">
-		                <img width="150" src="images/logo-git.png"/>
-		                <img width="150" src="images/logo-sublime-text-3.png"/>
-		                <img width="150" src="images/logo-postman.png"/>
-		                <img width="150" src="images/logo-gitlab-ci-cd.png"/>
-		            </div>
-		     </div>
-		    <!-- Other Tools Section End -->
-		    
-		</div>
-		<!-- Tools Section End -->
+		
 
 	</div>
 	<!-- Capstone body Start -->
