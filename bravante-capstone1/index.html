@@ -20,35 +20,20 @@
 
 </head>
 
-<body class="bg-secondary ">
+<body class="bg-secondary c-backround">
 	<!-- navbar section start -->				
-			<nav class="navbar navbar-expand-lg navbar-dark bg-dark text-center sticky-top">
-				<div class="container-fluid">
-					<div class="d-flex flex-row justify-content-center">
-						<a class="navbar-brand p-3" href="#aboutMe">Angelico</a>
-					  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-					    <span class="navbar-toggler-icon"></span>
-					  </button>
-						<div class="collapse navbar-collapse ml-auto" id="navbarNavDropdown">
-						    <ul class="navbar-nav ">
-						      <li class="nav-item ">
-						        <a class="nav-link" href="#projects">Projects</a>
-						      </li>
-						      <li class="nav-item ">
-						        <a class="nav-link" href="#landing">Home</a>
-						      </li>						   
-						      <li class="nav-item ">
-						        <a class="nav-link" href="#tools">Tools</a>
-						      </li>
-						      <li class="nav-item">
-						        <a class="nav-link" href="#contact">Contact</a>
-					      </li>		  
-					    </ul>
-				    </div>
-
-				  </div>
-				</div>
-			</nav>				
+			<div class="container-fluid bg-dark ">
+			  <nav class="navbar navbar-inverse ">
+			    <div class="container-fluid">
+			      <ul class="nav navbar-nav d-flex flex-row mx-auto">
+			        <li><a id="len1" class="hoverable text-light px-2" href="#">Home</a></li>
+			        <li><a id="len2" class="hoverable text-light px-2" href="#">Projects</a></li>
+			        <li><a id="len3" class="hoverable text-light px-2" href="#">Tools</a></li>
+			        <li><a id="len4" class="hoverable text-light px-2" href="#">Contact</a></li>
+			      </ul>
+			    </div>
+			  </nav>
+			</div>				
 	<!-- navbar section end -->
 
 
@@ -80,53 +65,58 @@
 		<!--Projects Section Start -->
 				<div id="projects" class="bg-white text-light text-center min-vh-100 p-5">
 					<h2 class="mb-3 text-dark">Projects</h2>
-					<div class="d-lg-flex justify-content-center p-md-5 row">
+					
+					<div class="c-grid text-light text-center">
+						<!-- HTML Start -->
+							<div class="card rounded bg-dark mx-2 mt-4">
+								<div class="p-3">
+									<img src="https://3.bp.blogspot.com/-7x5c_f1yzsQ/XHv9FZKHrEI/AAAAAAAADrE/4iGl9Lm6K2odX4SdWbU_RN6gZesx4IaGACEwYBhgL/s1600/html.jpg" class="card-img-top c-img-fit rounded-pill">
+								    <h5 class="card-title my-1">HTML</h5>
+								    <h6 class="card-subtitle mb-2 text-muted">Programming Basics</h6>
+								    <p id="project-description" class="card-text text-justify">The HyperText Markup Language or HTML is the standard markup language for documents designed to be displayed in a web browser. It is often assisted by technologies such as Cascading Style Sheets (CSS) and scripting languages such as JavaScript.
 
-						<!-- HTML Card Start -->
-						<div class="card bg-dark col-xl-3 col-12 mb-5 mb-xl-0">
-						  <div class="card-body">
-						  	<img src="https://3.bp.blogspot.com/-7x5c_f1yzsQ/XHv9FZKHrEI/AAAAAAAADrE/4iGl9Lm6K2odX4SdWbU_RN6gZesx4IaGACEwYBhgL/s1600/html.jpg" class="card-img-top">
-						    <h5 class="card-title my-1">HTML</h5>
-						    <h6 class="card-subtitle mb-2 text-muted">Programming Basics</h6>
-						    <p class="card-text text-justify">The HyperText Markup Language or HTML is the standard markup language for documents designed to be displayed in a web browser. It is often assisted by technologies such as Cascading Style Sheets (CSS) and scripting languages such as JavaScript.
+									Web browsers receive HTML documents from a web server or from local storage and render the documents into multimedia web pages. HTML describes the structure of a web page semantically and originally included cues for its appearance.</p>
+								    <a href="#" class="card-link">Link to Project</a>
+							    </div>
+							</div>
 
-							Web browsers receive HTML documents from a web server or from local storage and render the documents into multimedia web pages. HTML describes the structure of a web page semantically and originally included cues for its appearance.</p>
-						    <a href="#" class="card-link">Link to Project</a>
-						  </div>
-						</div>
-						<!-- HTML Card End -->
+						<!-- HTML End -->
 
-						<!-- Bootstrap Card Start -->
-						<div class="card bg-dark col-xl-3 col-12 mb-5 mb-xl-0 mr-xl-5 ml-xl-5">
-						    <div class="card-body">
-						        <img src="./images/bootstrap-illustration.png" class="card-img-top">
-						        <h5 class="card-title mt-3">Bootstrap</h5>
-						        <h6 class="card-subtitle text-muted mb-2">Rapid Prototyping</h6>
-						        <p class="card-text text-justify">
-						            Bootstrap is a free and open-source CSS framework directed at responsive, mobile-first front-end web development. It contains HTML, CSS and (optionally) JavaScript-based design templates for typography, forms, buttons, navigation, and other interface components.
+						<!-- Bootstrap Start -->
+							<div class="card rounded bg-dark mx-2 mt-4">
+								<div class="p-3">
+									<img src="./images/bootstrap-illustration.png" class="card-img-top c-img-fit rounded-pill">
+									<h5 class="card-title mt-3">Bootstrap</h5>
+									<h6 class="card-subtitle text-muted mb-2">Rapid Prototyping</h6>
+									<p class="card-text text-justify">
+									    Bootstrap is a free and open-source CSS framework directed at responsive, mobile-first front-end web development. It contains HTML, CSS and (optionally) JavaScript-based design templates for typography, forms, buttons, navigation, and other interface components.
 
-						            As of December 2022, Bootstrap is the 14th most starred project (4th most starred library) on GitHub, with over 161,000 stars. According to W3Techs, Bootstrap is used by 19.2% of all websites.
-						        </p>
-						        <a href="#" class="card-link">Link To Project</a>
-						    </div>
-						</div>
-						<!-- Bootstrap Card End -->
+									    As of December 2022, Bootstrap is the 14th most starred project (4th most starred library) on GitHub, with over 161,000 stars. According to W3Techs, Bootstrap is used by 19.2% of all websites.
+									</p>
+									<a href="#" class="card-link">Link To Project</a>
+								</div>
+							</div>
 
-						<!-- Node JS Server Card Start -->
-						<div class="card bg-dark col-xl-3 col-12 mb-5 mb-xl-0">
-						    <div class="card-body">
-						        <img src="./images/nodejs.png" class="card-img-top">
-						        <h5 class="card-title mt-3">Node JS Server</h5>
-						        <h6 class="card-subtitle text-muted mb-2">Backend Basics</h6>
-						        <p class="card-text text-justify">
-						           Node.js lets developers use JavaScript to write command line tools and for server-side scripting. The ability to run JavaScript code on the server is often used to generate dynamic web page content before the page is sent to the user's web browser. Consequently, Node.js represents a "JavaScript everywhere" paradigm,[6] unifying web-application development around a single programming language, as opposed to using different languages for the server- versus client-side programming.
-						        </p>
-						        <a href="#" class="card-link">Link To Project</a>
-						    </div>
-						</div>
-						<!-- Node JS Server Card End -->
+						<!-- Bootstrap End -->
+
+						<!-- Node JS Start -->
+							<div class="card rounded bg-dark mx-2 mt-4">
+								<div class="p-3">
+									<img src="./images/nodejs.png" class="card-img-top c-img-fit rounded-pill">
+									<h5 class="card-title mt-3">Node JS Server</h5>
+									<h6 class="card-subtitle text-muted mb-2">Backend Basics</h6>
+									<p class="card-text text-justify">
+									   Node.js lets developers use JavaScript to write command line tools and for server-side scripting. The ability to run JavaScript code on the server is often used to generate dynamic web page content before the page is sent to the user's web browser. Consequently, Node.js represents a "JavaScript everywhere" paradigm,[6] unifying web-application development around a single programming language, as opposed to using different languages for the server- versus client-side programming.
+									</p>
+									<a href="#" class="card-link">Link To Project</a>
+								</div>
+							</div>
+						<!-- Node JS End -->
 
 					</div>
+
+
+
 				</div>
 		<!--Projects Section End -->
 
@@ -181,7 +171,7 @@
 							<span><a href="https://www.onlinejobs.ph/jobseekers/info/2673171"><i class="fa-solid fa-globe fa-2xl def-color"></i></a></span>
 						</div>
 					</div>
-					<div class="container mt-5 p-3 text-light "> 						 
+					<div class="container mt-5 p-3 text-light c-grid"> 						 
 						  <div class="row mt-2"> 
 						    <div class="col-sm-12 col-md-12 col-xl-4 ml-auto">
 						      <form >
@@ -275,6 +265,9 @@
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 <!-- bootstrap bundle end -->
+
+<!-- js -->
+<script src="./index.js"></script>
 </body>
 
 </html>
