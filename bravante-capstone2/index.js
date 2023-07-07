@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const userRoute = require('./Routes/userRoute');
+const productRoute = require('./Routes/productRoute');
 
 const app = express();
 
@@ -21,8 +22,9 @@ app.use(express.urlencoded({extended: true}));
 app.use(cors());
 
 // Defines the "/users" string to be included for all user routes defined in the "user" route file
-// http://localhost:4000/users
+// http://localhost:4001/users
 app.use("/users", userRoute);
+app.use("/products", productRoute);
 
 
 app.listen(process.env.PORT || 4001, () => console.log(`Connected to port ${process.env.PORT || 4001}`));
