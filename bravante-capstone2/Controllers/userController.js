@@ -42,3 +42,29 @@ module.exports.loginUser = (reqBody) => {
         }
     );
 };
+
+module.exports.setAdmin = (data, reqParams) => {
+    if (data.isAdmin) {
+        let updateUser = {
+            isAdmin: data.user.isAdmin
+        }
+
+        return userModel.findByIdAndUpdate(reqParams.userId, updateUser).then(
+            (product, err) => {
+                if (err) {
+                    return false;
+                } else {
+                    return true;
+                }
+
+            }
+        )
+    
+    }
+
+    let message = Promise.resolve("Please use admin account to access")
+
+    return message.then((value) => {
+        return {value}
+    });   
+}

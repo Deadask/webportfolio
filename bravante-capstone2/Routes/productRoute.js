@@ -28,6 +28,7 @@ router.get('/all',auth.verify, (req, res) =>{
     );
 }) 
 
+// get active items(admin only)
 router.get("/active",auth.verify, (req,res) => {
     const data = {
         product: req.body,
@@ -36,5 +37,45 @@ router.get("/active",auth.verify, (req,res) => {
 
 	productController.getActiveProducts(data).then(resultFromController => res.send(resultFromController));
 });
+
+// retrieve single product
+router.get('/:productId', (req, res) => {
+    productController.getSingleProduct(req.params).then(resultFromController => res.send(resultFromController));
+})
+
+// update product details (admin only)
+router.put('/:productId', auth.verify, (req, res) =>{
+    const data = {
+        product : req.body,
+        isAdmin : auth.decode(req.headers.authorization).isAdmin
+    }
+
+    productController.updateProduct(data,req.params, req.body).then(resultFromController => res.send(resultFromController));
+})
+
+// archive product
+router.patch('/archives/:productId', auth.verify, (req, res) =>{
+    const data = {
+        product : req.body,
+        isAdmin : auth.decode(req.headers.authorization).isAdmin
+    }
+
+    productController.archiveProduct(data, req.params, req.body).then(resultFromController => res.send(resultFromController));
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = router;

@@ -16,6 +16,12 @@ const productModel = new mongoose.Schema({
         required: [true, "Price Required"]
     },
 
+    quantity: {
+        type: Number,
+        required: [true, "Quantity Required"],
+        default: 1
+    },
+
     isActive:{
         type: Boolean,
         default: true,
