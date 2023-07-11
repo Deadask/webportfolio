@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const userRoute = require('./Routes/userRoute');
 const productRoute = require('./Routes/productRoute');
+const orderRoute = require('./Routes/orderRoute');
 
 const app = express();
 
@@ -15,7 +16,7 @@ mongoose.connect("mongodb+srv://errellebravante:admin123@wdc028-course-booking.h
 );
 
 //dicplay succesful connection to db
-mongoose.connection.once("open", () => console.log("Connected to MongoDB"));
+mongoose.connection.once("open", () => console.log("Connected to eCommerce Database"));
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -25,6 +26,7 @@ app.use(cors());
 // http://localhost:4001/users
 app.use("/users", userRoute);
 app.use("/products", productRoute);
+app.use("/orders", orderRoute);
 
 
 app.listen(process.env.PORT || 4001, () => console.log(`Connected to port ${process.env.PORT || 4001}`));

@@ -1,4 +1,4 @@
-const ProductModel = require("../Models/productModel");
+const ProductModel = require("../Models/ProductModel");
 
 module.exports.addProduct = (data) => {
     if (data.isAdmin) {

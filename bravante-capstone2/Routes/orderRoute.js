@@ -1,0 +1,31 @@
+const express = require('express');
+const router = express.Router();
+const orderController =  require('../Controllers/orderController');
+const auth = require('../auth');
+
+// create a new order
+router.patch('/create', auth.verify, (req, res) => {
+    let data = {
+        userId: auth.decode(req.headers.authorization).id,
+        productId: req.body.productId,
+        isAdmin: auth.decode(req.headers.authorization).isAdmin,
+        quantity: req.body.quantity
+    }
+
+    orderController.createOrder(data).then(resultFromController => res.send(resultFromController))
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+module.exports = router;

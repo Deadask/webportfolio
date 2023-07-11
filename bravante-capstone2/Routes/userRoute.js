@@ -41,6 +41,15 @@ router.patch('/:userId/admin', auth.verify, (req, res) => {
     );
 })
 
+// retrieve user details.
+router.get('/:userId/view', (req,res)=> {
+    userController.viewUser(req.params).then(
+        resultFromController => res.send(
+        resultFromController
+        )
+    );
+})
+
 
 
 
