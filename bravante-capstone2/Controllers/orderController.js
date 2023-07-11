@@ -9,14 +9,14 @@ const ProductModel = require('../Models/ProductModel');
     if(data.isAdmin == false) {
         //checks if user has existing order
         let doesUserHaveOrder = await OrderModel.find({userId : data.userId}).then(result => {
-            console.log(result.length)
-            if (result.lenght >0) {
-                return false
-            } else {
+            
+            if (result.length >0) {
                 return true
+            } else {
+                return false
             }
         })
-        console.log(doesUserHaveOrder)
+        
         if (doesUserHaveOrder){
             let subTotal = await ProductModel.findById(data.productId).then(result => {
                 let subTotalAmount = result.price * data.quantity
@@ -25,41 +25,28 @@ const ProductModel = require('../Models/ProductModel');
             let newProductOrder = {
                 productId: data.productId,
                 quantity: data.quantity,
-                subTotal: subTotal
+                subtotal: subTotal
             }
-            let updateOrderProducts = await OrderModel.find({userId : data.userId}).then(result => {
-                    // add req.body to products array
-                    console.log(typeof result);
-                    console.log(result);
-                    console.log(typeof result.products);
-                    console.log(result.products);
-                    // check if other component of result is undefined
-                    console.log(typeof result.userId)
-                    console.log(result.userId);
-                    result.products.push(newProductOrder);
-                        
-                    
+            let updateOrderProducts = await OrderModel.findOne({userId : data.userId}).then(result => {
+                result.products.push(newProductOrder);
+                result.totalAmount = result.totalAmount+subTotal;
+                result.purchasedOn = new Date();
 
-                    // adjust total amount accounting the added order
-                    result.totalAmount = subTotal + result.totalAmount;
-
-                    // updates timestamp of order modification
-                    result.purchasedOn = new Date()
                 return result.save().then((order, err) =>{
-                    if(err){
+                    if (err) {
                         return false;
                     } else {
-                        console.log("created from doesUserHaveOrder: true")
-                        return true;
+                        return true
                     }
                 })
-                }
-            )
-            if(doesUserHaveOrder){
+            })
+
+            if (updateOrderProducts && doesUserHaveOrder) {
                 return true;
             } else {
                 return false
             }
+           
 
         } else {
             let subTotal = await ProductModel.findById(data.productId).then(result => {
