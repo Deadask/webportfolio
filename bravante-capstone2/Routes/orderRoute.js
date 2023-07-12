@@ -15,6 +15,15 @@ router.patch('/create', auth.verify, (req, res) => {
     orderController.createOrder(data).then(resultFromController => res.send(resultFromController))
 })
 
+router.get('/view', auth.verify, (req, res)=> {
+    let data = {
+        userId: auth.decode(req.headers.authorization).id,
+        isAdmin: auth.decode(req.headers.authorization).isAdmin
+    }
+
+    orderController.viewAllOrders(data).then(resultFromController => res.send(resultFromController));
+})
+
 
 
 

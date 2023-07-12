@@ -83,3 +83,17 @@ const ProductModel = require('../Models/ProductModel');
         return {value}
     });   
  }
+
+ module.exports.viewAllOrders = (data) => {
+    if (data.isAdmin) {
+        return OrderModel.find().then(order => {
+            return order
+        })
+    }
+
+    let message = Promise.resolve("Please use admin account to access")
+
+    return message.then((value) => {
+        return {value}
+    });   
+ }
