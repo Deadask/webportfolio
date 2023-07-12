@@ -96,7 +96,7 @@ module.exports.archiveProduct = (data, reqParams, reqBody) => {
             isActive: reqBody.isActive
         }
 
-        return ProductModel.findByIdAndUpdate(reqRapams.productId, updatedStatus).then(
+        return ProductModel.findByIdAndUpdate(reqParams.productId, updatedStatus).then(
             (product, err) => {
                 if (err) {
                     return false;
