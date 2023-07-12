@@ -69,10 +69,13 @@ module.exports.setAdmin = (data, reqParams) => {
     });   
 }
 
-module.exports.viewUser = (reqParams) => {
-    return UserModel.findById(reqParams.userId).then(user => {
-        return user;
-
+module.exports.viewUser = async (reqParams) => {
+    return await UserModel.findById(reqParams.userId).then(user => {
+        let userDetails = {
+            email: user.email,
+            isAdmin: user.isAdmin
+        }
+        return userDetails;
     })
 
 }
