@@ -50,6 +50,15 @@ router.get('/:userId/view', (req,res)=> {
     );
 })
 
+router.get("/details", auth.verify, (req, res) => {
+
+    // Uses the "decode" method defined in the "auth.js" file to retrieve the user information from the token passing the "token" from the request header as an argument
+    const userData = auth.decode(req.headers.authorization)
+
+    // Provides the user's ID for the getProfile controller method
+    userController.getProfile({userId: userData.id}).then(resultFromController => res.send(resultFromController));
+});
+
 
 
 

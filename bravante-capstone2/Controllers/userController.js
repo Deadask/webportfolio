@@ -79,3 +79,14 @@ module.exports.viewUser = async (reqParams) => {
     })
 
 }
+
+module.exports.getProfile = (data) => {
+return User.findById(data.userId).then(result => {
+    // Changes the value of the user's password to an empty string when returned to the frontend
+    // Not doing so will expose the user's password which will also not be needed in other parts of our application
+    // Unlike in the "register" method, we do not need to call the mongoose "save" method on the model because we will not be changing the password of the user in the database but only the information that we will be sending back to the frontend application
+    result.password = "";
+    // Returns the user information with the password as an empty string
+    return result;
+    });
+};
