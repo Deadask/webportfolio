@@ -5,8 +5,11 @@ import Home from './pages/Home';
 
 import Register from './pages/Register';
 import Login from './pages/Login';
-// import Logout from './pages/Logout';
-// import Error from './pages/Error';
+import Logout from './pages/Logout';
+import AdminHome from './components/AdminHome';
+import Product from './pages/Product';
+import AddProduct from './components/AddProduct';
+import Error from './pages/Error';
 
 import './App.css';
 
@@ -28,7 +31,7 @@ function App() {
   }
 
   useEffect(()=>{
-    fetch(`${process.env.API_URL}/users/details`,{
+    fetch(`${process.env.REACT_APP_API_URL}/users/details`,{
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }
@@ -60,10 +63,13 @@ function App() {
         <Container>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/admin" element={<AdminHome />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/products" element={<Product />} />
             <Route path="/login" element={<Login />} />
-            {/* <Route path="/logout" element={<Logout />} />
-            <Route path="/*" element={<Error />} /> */}
+            <Route path="/logout" element={<Logout />} />
+            <Route path="/products/add" element={<AddProduct />} />
+            <Route path="/*" element={<Error />} /> 
           </Routes>
         </Container>
       </Router>
