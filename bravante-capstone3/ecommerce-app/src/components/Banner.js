@@ -10,7 +10,7 @@ return (
         <Col className="p-5">
             <h1>{title}</h1>
             <p>{content}</p>
-            {/*<Link to={destination}>{label}</Link>*/}
+            
             <Button variant="primary" as={Link} to={destination} >{label}</Button>
 
         </Col>

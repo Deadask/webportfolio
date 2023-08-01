@@ -10,6 +10,7 @@ import AdminHome from './components/AdminHome';
 import Product from './pages/Product';
 import AddProduct from './components/AddProduct';
 import Error from './pages/Error';
+import ProductView from './components/ProductVeiw';
 
 import './App.css';
 
@@ -65,10 +66,11 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/admin" element={<AdminHome />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/products" element={<Product />} />
+            <Route path="/products/all" element={<Product />} />
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/products/add" element={<AddProduct />} />
+            <Route path="/products/:productId" element={<ProductView />} />
             <Route path="/*" element={<Error />} /> 
           </Routes>
         </Container>

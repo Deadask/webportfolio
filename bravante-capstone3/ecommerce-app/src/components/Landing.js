@@ -12,7 +12,7 @@ export default function Landing(){
                         <Card className='cardHighlight p-0'>
                             <Card.Title>View Products</Card.Title>
                             <Card.Text>Veiw All Active Products</Card.Text>
-                            <Button className='bg-primary my-auto' as={Link} to={'/products'}>Veiw</Button>
+                            <Button className='bg-primary my-auto' as={Link} to={'/products/all'}>Veiw</Button>
                         </Card>
                     </Col>
 

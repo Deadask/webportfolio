@@ -20,7 +20,14 @@ function AppNavbar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={NavLink} to="/">Home</Nav.Link>            
+            <Nav.Link as={NavLink} to="/">Home</Nav.Link>
+            {(user.isAdmin) ?
+              <Nav.Link as={NavLink} to="/products/all">Products</Nav.Link>
+              :
+              <>
+              </>
+
+            }            
             
             {(user.id) ?
               <Nav.Link as={NavLink} to="/logout">Logout</Nav.Link>
