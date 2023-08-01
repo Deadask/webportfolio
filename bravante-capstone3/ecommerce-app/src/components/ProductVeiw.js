@@ -16,10 +16,19 @@ export default function ProductView () {
     const {productId} = useParams();
     const {user} = useContext(UserContext);
     const [show, setShow] = useState(false);
+    const [show2, setShow2] = useState(false);
     const token = localStorage.getItem('token');
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
+    const handleShow = () => {
+            setShow(true)
+            setShow2(false)
+            };
+    const handleClose2 = () => setShow2(false);
+    const handleShow2 = () =>{
+        setShow2(true)
+        setShow(false)
+        };
+    
     useEffect(()=> {
         fetch(`${process.env.REACT_APP_API_URL}/products/${productId}`)
         .then(res => res.json())
@@ -31,9 +40,14 @@ export default function ProductView () {
             setPrice(data.price);
             setDate(data.createdOn);
             setIsActive(data.isActive);
+            if(data.isActive) {
+                localStorage.setItem('status', "Active")
+            } else {
+                localStorage.setItem('status', "Archived")
+            }
         });
     }, [productId]);
-    
+    let status = localStorage.getItem('status');
     let updateProduct =(e)=>{
        e.preventDefault();
 
@@ -48,33 +62,66 @@ export default function ProductView () {
                 description: description,
                 quantity: quantity,
                 price: price,
-            })
-            .then(res =>  res.json())
-            .then(data => {
-                console.log(`update product ${data}`)
-                if (data) {
-                    setName("");
-                    setDescription("");
-                    setPrice("");
-                    setQuantity("");
-    
-                    Swal.fire({
-                        title: "Success!",
-                        icon: "success",
-                        text: "Product Added!"
-                    })
-    
-                    navigate('/products/add')
-                } else {
-                    Swal.fire({
-                        title: "Something went wrong",
-                        icon: "error",
-                        text: "Please, try again."
-                    })
-                }
-            })
+            })        
+        })
+        .then(res =>  res.json())
+        .then(data => {
+            console.log(`update product ${data}`)
+            if (data) {
+                setName("");
+                setDescription("");
+                setPrice("");
+                setQuantity("");
 
-       })
+                Swal.fire({
+                    title: "Success!",
+                    icon: "success",
+                    text: "Product Updated!"
+                })
+
+                navigate('/products/all')
+            } else {
+                Swal.fire({
+                    title: "Something went wrong",
+                    icon: "error",
+                    text: "Please, try again."
+                })
+            }
+        })
+    }
+
+    let archiveProduct = (e)=> {
+        e.preventDefault();
+
+       fetch(`${process.env.REACT_APP_API_URL}/products/archives/${productId}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                isActive: isActive
+            })        
+        })
+        .then(res =>  res.json())
+        .then(data => {
+            console.log(`update product ${data}`)
+            if (data) {
+                Swal.fire({
+                    title: "Success!",
+                    icon: "success",
+                    text: "Product Updated!"
+                })
+
+                navigate('/products/all')
+            } else {
+                Swal.fire({
+                    title: "Something went wrong",
+                    icon: "error",
+                    text: "Please, try again."
+                })
+            }
+        })
     }
 
 
@@ -136,7 +183,9 @@ export default function ProductView () {
                                     placeholder="Set Price" 
                                     required
                                     />                                    
-                                </Form.Group>                          
+                                </Form.Group>
+                                <Button variant="success" type="submit" id="submitBtn">
+                Update</Button>                        
                             </Form>
                         </Card.Body>
                     </Card>
@@ -144,9 +193,49 @@ export default function ProductView () {
                 <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
                     Close
-                </Button>
-                <Button variant="success" type="submit" id="submitBtn">
-                Update</Button>                
+                </Button>                                
+            </Modal.Footer>
+            </Modal>
+
+            <Modal
+                show={show2}
+                onHide={handleClose2}
+                backdrop="static"
+                keyboard={false}
+            >
+                <Modal.Header closeButton>
+                <Modal.Title>Archive</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Card>
+                        <Card.Header>Update Fields to be changed</Card.Header>
+                        <Card.Body>
+                        <Form onSubmit={(e)=> archiveProduct(e)} >
+                                <Form.Group className="mb-3" controlId="name">
+                                    {/* <Form.Label>Status</Form.Label>
+                                    <Form.Control 
+                                    type="text"
+                                    value={isActive}
+                                    onChange={(e) => {setIsActive(e.target.value)}}
+                                    placeholder="Enter Product Name" 
+                                    required
+                                    /> */}
+                                    <Form.Select onChange={(e)=>{setIsActive(e.target.value)}}>
+                                        <option value={true}>True</option>
+                                        <option value={false}>False</option>
+                                        
+                                    </Form.Select>
+                                </Form.Group>               
+                                <Button variant="success" type="submit" id="submitBtn">
+                Update</Button>                        
+                            </Form>
+                        </Card.Body>
+                    </Card>
+                </Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose2}>
+                    Close
+                </Button>                                
             </Modal.Footer>
             </Modal>
         
@@ -165,7 +254,7 @@ export default function ProductView () {
                                 <Card.Subtitle>Created on:</Card.Subtitle>
                                 <Card.Text>{date}</Card.Text>
                                 <Card.Subtitle>Status:</Card.Subtitle>
-                                <Card.Text>{isActive}</Card.Text>
+                                <Card.Text>{status}</Card.Text>
                                 {(user.isAdmin) ?
                                     <Container className='text-center'>
                                     <Row className='justify-content-around'>
@@ -174,7 +263,7 @@ export default function ProductView () {
                                     Update</Button> 
                                         </Col>
                                         <Col>
-                                        <Button variant="primary" onClick={handleShow}>
+                                        <Button variant="primary" onClick={handleShow2}>
                                     Activate/Archive</Button> 
                                         </Col>
                                     </Row>

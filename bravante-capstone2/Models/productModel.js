@@ -19,7 +19,6 @@ const productModel = new mongoose.Schema({
     quantity: {
         type: Number,
         required: [true, "Quantity Required"],
-        default: 1
     },
 
     isActive:{

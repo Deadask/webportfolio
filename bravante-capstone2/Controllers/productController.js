@@ -5,6 +5,7 @@ module.exports.addProduct = (data) => {
         let newProduct = new ProductModel({
             name: data.product.name,
             description: data.product.description,
+            quantity: data.product.quantity,
             price: data.product.price
         });
 
