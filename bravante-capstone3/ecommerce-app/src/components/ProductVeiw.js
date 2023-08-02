@@ -1,5 +1,5 @@
 import {useState, useContext, useEffect} from 'react'
-import { Container, Card, Button, Row, Col, Modal, Form } from 'react-bootstrap';
+import { Container, Card, Button, Row, Col, Modal, Form, InputGroup  } from 'react-bootstrap';
 import {useParams, useNavigate}  from 'react-router-dom'
 import UserContext from '../UserContext'
 import Swal from 'sweetalert2';
@@ -11,22 +11,36 @@ export default function ProductView () {
 	const [description, setDescription] = useState("");
 	const [price, setPrice] = useState(0);
     const [quantity, setQuantity] = useState(0);
+    const [subTotal, setSubtotal] = useState(0)
+    const [orderQuantity, setOrderQuantity] = useState(0);
     const [date, setDate] = useState();
     const [isActive, setIsActive] = useState(true)
     const {productId} = useParams();
     const {user} = useContext(UserContext);
     const [show, setShow] = useState(false);
     const [show2, setShow2] = useState(false);
+    const [show3, setShow3] = useState(false);
     const token = localStorage.getItem('token');
     const handleClose = () => setShow(false);
     const handleShow = () => {
-            setShow(true)
-            setShow2(false)
-            };
+        setShow(true)
+        setShow2(false)
+        setShow3(false)
+        };
     const handleClose2 = () => setShow2(false);
     const handleShow2 = () =>{
         setShow2(true)
         setShow(false)
+        setShow3(false)
+        };
+    const handleClose3 = () => {
+        setShow3(false)
+        setOrderQuantity(0)
+    }; 
+    const handleShow3 = () =>{
+        setShow2(false)
+        setShow(false)
+        setShow3(true)
         };
     
     useEffect(()=> {
@@ -124,120 +138,199 @@ export default function ProductView () {
         })
     }
 
+    let addCart=(e)=>{
+        e.preventDefault();
+        console.log("add to cart");
+    }
+    
+    let increment=()=>{        
+        setOrderQuantity((prevValue)=>prevValue+1)
+        console.log(orderQuantity)
+        return orderQuantity
+    }
+
+    let decrement=()=>{
+        if(orderQuantity>0){
+        setOrderQuantity((prevValue)=>prevValue-1)
+        console.log(orderQuantity)
+        
+        return orderQuantity
+        } else {
+            setOrderQuantity(0)
+        }
+    }
+
 
     return(
         <Container >
+            {(user.isAdmin)?
+                <>
+                    <Modal
+                        show={show}
+                        onHide={handleClose}
+                        backdrop="static"
+                        keyboard={false}
+                    >
+                        <Modal.Header closeButton>
+                        <Modal.Title>Update Info</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Card>
+                                <Card.Header>Update Fields to be changed</Card.Header>
+                                <Card.Body>
+                                <Form onSubmit={(e)=> updateProduct(e)} >
+                                        <Form.Group className="mb-3" controlId="name">
+                                            <Form.Label>Name</Form.Label>
+                                            <Form.Control 
+                                            type="text"
+                                            value={name}
+                                            onChange={(e) => {setName(e.target.value)}}
+                                            placeholder="Enter Product Name" 
+                                            required
+                                            />
+                                        </Form.Group>
+
+                                        <Form.Group className="mb-3" controlId="description">
+                                            <Form.Label>Description</Form.Label>
+                                            <Form.Control 
+                                            type="text"
+                                            value={description}
+                                            onChange={(e) => {setDescription(e.target.value)}}
+                                            placeholder="Enter Description" 
+                                            required
+                                            />                                    
+                                        </Form.Group>
+
+                                        <Form.Group className="mb-3" controlId="quantity">
+                                            <Form.Label>Quantity</Form.Label>
+                                            <Form.Control 
+                                            type="text"
+                                            value={quantity}
+                                            onChange={(e) => {setQuantity(e.target.value)}}
+                                            placeholder="Set Quantity" 
+                                            required
+                                            />                                    
+                                        </Form.Group>
+
+                                        <Form.Group className="mb-3" controlId="price">
+                                            <Form.Label>Price</Form.Label>
+                                            <Form.Control 
+                                            type="text"
+                                            value={price}
+                                            onChange={(e) => {setPrice(e.target.value)}}
+                                            placeholder="Set Price" 
+                                            required
+                                            />                                    
+                                        </Form.Group>
+                                        <Button variant="success" type="submit" id="submitBtn">
+                        Update</Button>                        
+                                    </Form>
+                                </Card.Body>
+                            </Card>
+                        </Modal.Body>
+                        <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>                                
+                    </Modal.Footer>
+                    </Modal>
+
+                    <Modal
+                        show={show2}
+                        onHide={handleClose2}
+                        backdrop="static"
+                        keyboard={false}
+                    >
+                        <Modal.Header closeButton>
+                        <Modal.Title>Archive</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Card>
+                                <Card.Header>Update Fields to be changed</Card.Header>
+                                <Card.Body>
+                                <Form onSubmit={(e)=> archiveProduct(e)} >
+                                        <Form.Group className="mb-3" controlId="name">
+                                            <Form.Select onChange={(e)=>{setIsActive(e.target.value)}}>
+                                                <option value={true}>True</option>
+                                                <option value={false}>False</option>
+                                                
+                                            </Form.Select>
+                                        </Form.Group>               
+                                        <Button variant="success" type="submit" id="submitBtn">
+                        Update</Button>                        
+                                    </Form>
+                                </Card.Body>
+                            </Card>
+                        </Modal.Body>
+                        <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose2}>
+                            Close
+                        </Button>                                
+                    </Modal.Footer>
+                    </Modal>
+                </>
+            :
             <Modal
-                show={show}
-                onHide={handleClose}
-                backdrop="static"
-                keyboard={false}
+            show={show3}
+            onHide={handleClose3}
+            backdrop="static"
+            keyboard={false}
             >
                 <Modal.Header closeButton>
-                <Modal.Title>Update Info</Modal.Title>
+                <Modal.Title>Add to Cart</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Card>
-                        <Card.Header>Update Fields to be changed</Card.Header>
+                        <Card.Header>{name}</Card.Header>
                         <Card.Body>
-                        <Form onSubmit={(e)=> updateProduct(e)} >
+                            <Form onSubmit={(e)=> addCart(e)} >
                                 <Form.Group className="mb-3" controlId="name">
-                                    <Form.Label>Name</Form.Label>
-                                    <Form.Control 
-                                    type="text"
-                                    value={name}
-                                    onChange={(e) => {setName(e.target.value)}}
-                                    placeholder="Enter Product Name" 
-                                    required
-                                    />
+                                    <Form.Text>{description}</Form.Text>
+                                    
                                 </Form.Group>
+                                <Form.Group className="mb-3" controlId="name">
+                                    
+                                    <Form.Text>Price</Form.Text>
+                                    <Form.Text><h3>P {price}</h3></Form.Text>
+                                </Form.Group>
+                                <Row>
+                                    <Col className='col-8'>
+                                        <InputGroup>                  
+                                            <Button className='bg-success buttonWidth' onClick={increment}>+</Button>
+                                            <Button disabled={(orderQuantity===0)}className='bg-success buttonWidth' onClick={decrement}>-</Button>
+                                            <Form.Control
+                                                value={orderQuantity}
+                                                onChange={(e)=>{setOrderQuantity(e.target.value)}}
+                                                className='text-center'
+                                            />
+                                            
+                                            <InputGroup.Text>Total</InputGroup.Text>
+                                            <InputGroup.Text
+                                            className='buttonWidth' 
+                                            value={subTotal} 
+                                            onChange = {(e)=>{setSubtotal(e.target.value)}}>{subTotal}</InputGroup.Text>
+                                        </InputGroup>
+                                    </Col> 
 
-                                <Form.Group className="mb-3" controlId="description">
-                                    <Form.Label>Description</Form.Label>
-                                    <Form.Control 
-                                    type="text"
-                                    value={description}
-                                    onChange={(e) => {setDescription(e.target.value)}}
-                                    placeholder="Enter Description" 
-                                    required
-                                    />                                    
-                                </Form.Group>
-
-                                <Form.Group className="mb-3" controlId="quantity">
-                                    <Form.Label>Quantity</Form.Label>
-                                    <Form.Control 
-                                    type="text"
-                                    value={quantity}
-                                    onChange={(e) => {setQuantity(e.target.value)}}
-                                    placeholder="Set Quantity" 
-                                    required
-                                    />                                    
-                                </Form.Group>
-
-                                <Form.Group className="mb-3" controlId="price">
-                                    <Form.Label>Price</Form.Label>
-                                    <Form.Control 
-                                    type="text"
-                                    value={price}
-                                    onChange={(e) => {setPrice(e.target.value)}}
-                                    placeholder="Set Price" 
-                                    required
-                                    />                                    
-                                </Form.Group>
-                                <Button variant="success" type="submit" id="submitBtn">
-                Update</Button>                        
+                                    <Col className='col-4'>
+                                        <InputGroup>                  
+                                            
+                                            
+                                        </InputGroup>
+                                    </Col>
+                                </Row>              
+                                <Button variant="success" type="submit" id="submitBtn">Update</Button>                          
                             </Form>
                         </Card.Body>
                     </Card>
                 </Modal.Body>
                 <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                    Close
-                </Button>                                
-            </Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose3}>
+                        Close
+                    </Button>                                
+                </Modal.Footer>
             </Modal>
-
-            <Modal
-                show={show2}
-                onHide={handleClose2}
-                backdrop="static"
-                keyboard={false}
-            >
-                <Modal.Header closeButton>
-                <Modal.Title>Archive</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Card>
-                        <Card.Header>Update Fields to be changed</Card.Header>
-                        <Card.Body>
-                        <Form onSubmit={(e)=> archiveProduct(e)} >
-                                <Form.Group className="mb-3" controlId="name">
-                                    {/* <Form.Label>Status</Form.Label>
-                                    <Form.Control 
-                                    type="text"
-                                    value={isActive}
-                                    onChange={(e) => {setIsActive(e.target.value)}}
-                                    placeholder="Enter Product Name" 
-                                    required
-                                    /> */}
-                                    <Form.Select onChange={(e)=>{setIsActive(e.target.value)}}>
-                                        <option value={true}>True</option>
-                                        <option value={false}>False</option>
-                                        
-                                    </Form.Select>
-                                </Form.Group>               
-                                <Button variant="success" type="submit" id="submitBtn">
-                Update</Button>                        
-                            </Form>
-                        </Card.Body>
-                    </Card>
-                </Modal.Body>
-                <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose2}>
-                    Close
-                </Button>                                
-            </Modal.Footer>
-            </Modal>
+            }
         
                 <Row className='justify-content-center'>
                     <Col className="col-xs-12 col-9 mt-2 p-1 ">
@@ -255,23 +348,32 @@ export default function ProductView () {
                                 <Card.Text>{date}</Card.Text>
                                 <Card.Subtitle>Status:</Card.Subtitle>
                                 <Card.Text>{status}</Card.Text>
-                                {(user.isAdmin) ?
+                                
                                     <Container className='text-center'>
-                                    <Row className='justify-content-around'>
-                                        <Col>
-                                        <Button variant="primary" onClick={handleShow}>
-                                    Update</Button> 
-                                        </Col>
-                                        <Col>
-                                        <Button variant="primary" onClick={handleShow2}>
-                                    Activate/Archive</Button> 
-                                        </Col>
-                                    </Row>
-                                                                
+                                        <Card.Footer className='text-center'>
+                                            <Row className='justify-content-around'>
+                                            {(user.isAdmin)?    
+                                                <>
+                                                    <Col>
+                                                    <Button className="bg-primary rounded-pill px-5" onClick={handleShow}>
+                                                Update</Button> 
+                                                    </Col>
+                                                    <Col>
+                                                    <Button className="bg-primary rounded-pill px-5"  onClick={handleShow2}>
+                                                Activate/Archive</Button> 
+                                                    </Col>
+                                                </>
+                                            :
+                                                <Col>
+                                                <Button className="bg-primary rounded-pill px-5" onClick={handleShow3} >Details</Button>
+                                                </Col>
+                                            }
+                                            </Row>
+                                        </Card.Footer>                      
                                     </Container>
-                                :
-                                    <Button className="bg-primary" disabled >Add to Cart</Button>
-                                }
+                                
+                                    
+                                
                             </Card.Body>
                         </Card>
                     </Col>

@@ -15,7 +15,7 @@ function AppNavbar() {
 
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="md" className="bg-body-secondary sticky-nav sticky-top">
         <Navbar.Brand as={Link} to = "/" >OLS</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -25,6 +25,9 @@ function AppNavbar() {
               <Nav.Link as={NavLink} to="/products/all">Products</Nav.Link>
               :
               <>
+              <Nav.Link as={NavLink} to="/products/all">Products</Nav.Link>
+              <Nav.Link>Cart</Nav.Link>
+              <Nav.Link>Check Out</Nav.Link>
               </>
 
             }            

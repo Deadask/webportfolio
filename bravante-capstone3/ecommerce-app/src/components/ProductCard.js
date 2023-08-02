@@ -1,23 +1,22 @@
 import { Button, Row, Col, Card } from 'react-bootstrap';
 import sample from "../images/sample.png";
 import {Link}  from 'react-router-dom'
-import {useContext} from 'react';
-import UserContext from '../UserContext';
+
 import Error from '../pages/Error';
 
 export default function CourseCard({product}) {
 
-const {user} = useContext(UserContext);
+
 const {name, description, price, _id, quantity, date} = product;
 
 
 return (
     <>
-    {(user.isAdmin) ?
+    
         <Col className="col-xs-12 col-4 mt-2 p-1 ">
             <Card className="p-0">
                 <Card.Body>
-                    <Card.Img variant="top" src={sample} />
+                    <Card.Img classvariant="top" src={sample} />
                     <Card.Title>{name}</Card.Title>
                     <Card.Subtitle>Description</Card.Subtitle>
                     <Card.Text>{description}</Card.Text>
@@ -27,15 +26,16 @@ return (
                     <Card.Text>{quantity}</Card.Text>
                     <Card.Subtitle>Created on:</Card.Subtitle>
                     <Card.Text>{date}</Card.Text>
+                    <Card.Footer className='text-center'>
+                        <Button className="bg-primary rounded-pill px-5" as={Link} to={`/products/${_id}`}>Details</Button>
+                    </Card.Footer>
                     
-                    <Button className="bg-primary" as={Link} to={`/products/${_id}`}>Details</Button>
                    
                 </Card.Body>
             </Card>
         </Col>
-    :
-        <Error/>
-    }
+    
+    
     </>
         
     )

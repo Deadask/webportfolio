@@ -4,11 +4,29 @@
   box-sizing: border-box;
 }
 
-.cardHighlight {
-  min-height: 10rem;
+/* .cardHighlight {
+  min-height: 30rem;
+  max-height: 30rem;
 }
 
 .imgSize {
-  height: 300px;
-  width: 300px;
+  height: 400px;
+  width: 400px;
+  
+} */
+
+.sticky-nav {
+  position: sticky;
+  padding-top:10px;
+  top: 0;
+  z-index: 5;
 }
+
+.buttonWidth {
+  width: 3rem;
+}
+
+.buttonWidth2 {
+  width: 6rem;
+}
+

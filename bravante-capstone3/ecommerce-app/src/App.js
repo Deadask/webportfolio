@@ -57,7 +57,7 @@ function App() {
   }, [])
 
   return (
-    <>
+    <Container fluid className='m-0 p-0 bg-body-tertiary'>
      <UserProvider value = {{user,setUser,unsetUser}}>
        <Router>
         <AppNavbar />
@@ -77,7 +77,7 @@ function App() {
       </Router>
      </UserProvider>
       
-    </>
+    </Container>
   );
 }
 
