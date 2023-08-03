@@ -1,6 +1,6 @@
 import {useState, useContext, useEffect} from 'react'
 import { Container, Card, Button, Row, Col, Modal, Form, InputGroup  } from 'react-bootstrap';
-import {useParams, useNavigate}  from 'react-router-dom'
+import {useParams, useNavigate, Link}  from 'react-router-dom'
 import UserContext from '../UserContext'
 import Swal from 'sweetalert2';
 import sample from '../images/sample.png'
@@ -11,7 +11,6 @@ export default function ProductView () {
 	const [description, setDescription] = useState("");
 	const [price, setPrice] = useState(0);
     const [quantity, setQuantity] = useState(0);
-    const [subTotal, setSubtotal] = useState(0)
     const [orderQuantity, setOrderQuantity] = useState(0);
     const [date, setDate] = useState();
     const [isActive, setIsActive] = useState(true)
@@ -36,6 +35,7 @@ export default function ProductView () {
     const handleClose3 = () => {
         setShow3(false)
         setOrderQuantity(0)
+        
     }; 
     const handleShow3 = () =>{
         setShow2(false)
@@ -56,12 +56,15 @@ export default function ProductView () {
             setIsActive(data.isActive);
             if(data.isActive) {
                 localStorage.setItem('status', "Active")
+                localStorage.setItem('status!', "Archive")
             } else {
                 localStorage.setItem('status', "Archived")
+                localStorage.setItem('status!', "Activate")
             }
         });
     }, [productId]);
     let status = localStorage.getItem('status');
+    let status1 = localStorage.getItem('status!');
     let updateProduct =(e)=>{
        e.preventDefault();
 
@@ -140,12 +143,44 @@ export default function ProductView () {
 
     let addCart=(e)=>{
         e.preventDefault();
-        console.log("add to cart");
+        fetch(`${process.env.REACT_APP_API_URL}/cart/add/${productId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization' : `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                quantity: orderQuantity
+            }) 
+        })
+        .then(res =>  res.json())
+        .then(data => {
+            console.log(`update product ${data}`)
+            if (data) {
+                Swal.fire({
+                    title: "Success!",
+                    icon: "success",
+                    text: "Product Updated!"
+                })
+                
+
+                navigate('/cart/view')
+            } else {
+                Swal.fire({
+                    title: "Something went wrong",
+                    icon: "error",
+                    text: "Please, try again."
+                })
+            }
+        })
+        
     }
-    
-    let increment=()=>{        
-        setOrderQuantity((prevValue)=>prevValue+1)
-        console.log(orderQuantity)
+    let count = 0
+    let increment=()=>{
+
+        setOrderQuantity(orderQuantity+1)
+        console.log(`orderQuantity `+orderQuantity)
+
         return orderQuantity
     }
 
@@ -157,7 +192,9 @@ export default function ProductView () {
         return orderQuantity
         } else {
             setOrderQuantity(0)
+            
         }
+        
     }
 
 
@@ -293,33 +330,25 @@ export default function ProductView () {
                                     <Form.Text>Price</Form.Text>
                                     <Form.Text><h3>P {price}</h3></Form.Text>
                                 </Form.Group>
-                                <Row>
-                                    <Col className='col-8'>
-                                        <InputGroup>                  
-                                            <Button className='bg-success buttonWidth' onClick={increment}>+</Button>
+                                <Row className="justify-content-center text-center">
+                                    <Col className='col-6'>
+                                        <InputGroup >                   
                                             <Button disabled={(orderQuantity===0)}className='bg-success buttonWidth' onClick={decrement}>-</Button>
-                                            <Form.Control
-                                                value={orderQuantity}
-                                                onChange={(e)=>{setOrderQuantity(e.target.value)}}
-                                                className='text-center'
-                                            />
                                             
-                                            <InputGroup.Text>Total</InputGroup.Text>
-                                            <InputGroup.Text
-                                            className='buttonWidth' 
-                                            value={subTotal} 
-                                            onChange = {(e)=>{setSubtotal(e.target.value)}}>{subTotal}</InputGroup.Text>
+                                            <Form.Control
+                                                value= {orderQuantity}
+                                                className='text-center'
+                                                disabled
+                                            />
+
+                                            <Button className='bg-success buttonWidth' onClick={increment}>+</Button>           
                                         </InputGroup>
                                     </Col> 
-
-                                    <Col className='col-4'>
-                                        <InputGroup>                  
-                                            
-                                            
-                                        </InputGroup>
-                                    </Col>
-                                </Row>              
-                                <Button variant="success" type="submit" id="submitBtn">Update</Button>                          
+                                    
+                                </Row>
+                                <Row className='mt-4'>         
+                                <Button variant="success" type="submit" id="submitBtn">Add to Cart</Button>
+                                </Row>                   
                             </Form>
                         </Card.Body>
                     </Card>
@@ -351,22 +380,34 @@ export default function ProductView () {
                                 
                                     <Container className='text-center'>
                                         <Card.Footer className='text-center'>
-                                            <Row className='justify-content-around'>
+                                            <Row className='justify-content-center'>
                                             {(user.isAdmin)?    
                                                 <>
-                                                    <Col>
-                                                    <Button className="bg-primary rounded-pill px-5" onClick={handleShow}>
+                                                
+                                                    <Col className='col-4'>
+                                                    <Button className="bg-primary rounded-pill px-4" onClick={handleShow}>
                                                 Update</Button> 
                                                     </Col>
-                                                    <Col>
-                                                    <Button className="bg-primary rounded-pill px-5"  onClick={handleShow2}>
-                                                Activate/Archive</Button> 
+                                                    <Col className='col-4'>
+                                                    <Button className="bg-primary rounded-pill px-4"  onClick={handleShow2}>
+                                                {status1}</Button> 
                                                     </Col>
+
+                                                    <Col className='col-4'>
+                                                    <Button className="bg-primary rounded-pill px-4" as={Link} to={"/products/all"} >Back</Button>
+                                                    </Col>
+                                                
                                                 </>
                                             :
-                                                <Col>
-                                                <Button className="bg-primary rounded-pill px-5" onClick={handleShow3} >Details</Button>
-                                                </Col>
+                                                <>
+                                                    <Col>
+                                                    <Button className="bg-primary rounded-pill px-5" onClick={handleShow3} >Details</Button>
+                                                    </Col>
+
+                                                    <Col>
+                                                    <Button className="bg-primary rounded-pill px-5" as={Link} to={"/products/all"} >Back</Button>
+                                                    </Col>
+                                                </>
                                             }
                                             </Row>
                                         </Card.Footer>                      

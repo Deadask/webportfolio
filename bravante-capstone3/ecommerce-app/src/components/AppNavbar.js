@@ -23,17 +23,17 @@ function AppNavbar() {
             <Nav.Link as={NavLink} to="/">Home</Nav.Link>
             {(user.isAdmin) ?
               <Nav.Link as={NavLink} to="/products/all">Products</Nav.Link>
-              :
-              <>
-              <Nav.Link as={NavLink} to="/products/all">Products</Nav.Link>
-              <Nav.Link>Cart</Nav.Link>
-              <Nav.Link>Check Out</Nav.Link>
-              </>
-
+              :            
+              <Nav.Link as={NavLink} to="/products/all">Products</Nav.Link>       
             }            
             
             {(user.id) ?
+              <>
+              <Nav.Link as={Link} to={"/cart/view"}>Cart</Nav.Link>
+              <Nav.Link>Check Out</Nav.Link>
               <Nav.Link as={NavLink} to="/logout">Logout</Nav.Link>
+              </>
+              
               :
               <>
               <Nav.Link as={NavLink} to="/login">Login</Nav.Link>

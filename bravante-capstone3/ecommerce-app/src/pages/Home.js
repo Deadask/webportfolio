@@ -9,20 +9,21 @@ import HotItems from '../components/HotItems';
 export default function Home() {
 	const {user} = useContext(UserContext);
 	let data = {}
-	if (user.isAdmin){
+	if (user.id){
 		data = {
 			title: "Online Store",
 			content: "Buy what you want Online",
-			destination: "/login",
-			label: "Login"
+			destination: "/products/all",
+			label: "Browse"
+			
 		}
 		
 	} else {
 		data = {
 			title: "Online Store",
 			content: "Buy what you want Online",
-			destination: "/products/all",
-			label: "Browse"
+			destination: "/login",
+			label: "Login"
 		}
 		
 	}

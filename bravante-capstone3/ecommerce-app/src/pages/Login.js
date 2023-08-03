@@ -43,8 +43,11 @@ export default function Login() {
 
     if (typeof data.access !== "undefined") {
         localStorage.setItem('token', data.access)
-        retrieveUserDetails(data.access);    
-            Swal.fire({
+        retrieveUserDetails(data.access);
+        
+        
+          
+        Swal.fire({
             title: "Login Successful",
             icon: "success",
             text: "Online Shopping"
@@ -84,7 +87,19 @@ export default function Login() {
     .then(res => res.json())
     .then(data => {
         console.log(data);
-        
+          if (data.isAdmin === false) {
+          fetch(`${process.env.REACT_APP_API_URL}/cart/view`, {
+            headers: {
+                'Authorization' : `Bearer ${token}`
+            }
+          })
+          .then(res => res.json())
+          .then(data => {
+            if(data){
+            localStorage.setItem('cart', data.cart)
+            }
+          }).catch(err => console.log(err))
+        }
         setUser({
             id: data._id,
             isAdmin: data.isAdmin

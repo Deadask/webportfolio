@@ -9,6 +9,7 @@ export default function Logout() {
 
 	useEffect(()=>{
 		setUser({id: null})
+		
 	})
 	
 	return(

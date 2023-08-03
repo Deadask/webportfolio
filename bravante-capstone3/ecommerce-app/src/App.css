@@ -28,5 +28,18 @@
 
 .buttonWidth2 {
   width: 6rem;
+
 }
 
+.alignCenter {
+  text-align: center;
+}
+
+.colBorder-secondary {
+  border: solid 1px lightslategray;
+  
+}
+
+.colBg-secondary {
+  background-color: lightslategray;
+}

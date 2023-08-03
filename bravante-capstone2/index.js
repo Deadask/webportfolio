@@ -4,6 +4,7 @@ const cors = require('cors');
 const userRoute = require('./Routes/userRoute');
 const productRoute = require('./Routes/productRoute');
 const orderRoute = require('./Routes/orderRoute');
+const cartRoute = require('./Routes/cartRoute')
 
 const app = express();
 
@@ -27,7 +28,7 @@ app.use(cors());
 app.use("/users", userRoute);
 app.use("/products", productRoute);
 app.use("/orders", orderRoute);
-
+app.use("/cart", cartRoute);
 
 app.listen(process.env.PORT || 4001, () => console.log(`Connected to port ${process.env.PORT || 4001}`));
 

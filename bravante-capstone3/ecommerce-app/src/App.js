@@ -10,7 +10,8 @@ import AdminHome from './components/AdminHome';
 import Product from './pages/Product';
 import AddProduct from './components/AddProduct';
 import Error from './pages/Error';
-import ProductView from './components/ProductVeiw';
+import ProductView from './components/ProductView';
+import ViewCart from './pages/ViewCart';
 
 import './App.css';
 
@@ -57,7 +58,7 @@ function App() {
   }, [])
 
   return (
-    <Container fluid className='m-0 p-0 bg-body-tertiary'>
+    <Container fluid className='m-0 p-0'>
      <UserProvider value = {{user,setUser,unsetUser}}>
        <Router>
         <AppNavbar />
@@ -71,7 +72,8 @@ function App() {
             <Route path="/logout" element={<Logout />} />
             <Route path="/products/add" element={<AddProduct />} />
             <Route path="/products/:productId" element={<ProductView />} />
-            <Route path="/*" element={<Error />} /> 
+            <Route path="/*" element={<Error />} />
+            <Route path="/cart/view" element={<ViewCart />} />
           </Routes>
         </Container>
       </Router>
