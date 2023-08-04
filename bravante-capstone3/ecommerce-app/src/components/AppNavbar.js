@@ -21,21 +21,12 @@ function AppNavbar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={NavLink} to="/">Home</Nav.Link>
-            {(user.isAdmin) ?
-              <Nav.Link as={NavLink} to="/products/all">Products</Nav.Link>
-              
-              :
-
-              <>            
-              <Nav.Link as={NavLink} to="/products/all">Products</Nav.Link>
-                
-              </>     
-            }            
+                        
             
             {(user.id) ?
               <>                           
               <Nav.Link as={NavLink} to="/logout">Logout</Nav.Link>
-              
+              <Nav.Link as={NavLink} to="/products/all">Products</Nav.Link>
               </>
               
               :
@@ -44,10 +35,11 @@ function AppNavbar() {
               <Nav.Link as={NavLink} to="/register">Register</Nav.Link>
               </>
             }
-            {(user.id === true && user.isAdmin === false) ?
-              <Nav.Link as={NavLink} to="/cart/view">Cart</Nav.Link>
-              :
+            {(user.admin) ?
               <></>
+              
+              :
+              <Nav.Link as={NavLink} to="/cart/view">Cart</Nav.Link>
             }
             </Nav>
 
