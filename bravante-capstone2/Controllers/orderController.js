@@ -1,7 +1,7 @@
-const OrderModel = require('../Models/OrderModel');
+const OrderModel = require('../Models/orderModel');
 const CartModel = require('../Models/CartModel.js')
 
-const ProductModel = require('../Models/ProductModel');
+const ProductModel = require('../Models/productModel');
 
 
 // controller for order creation
