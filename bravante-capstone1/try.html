@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+
+	<link rel="stylesheet" type="text/css" href="./index.css">
+</head>
+<body>
+
+	<div>
+		<div class="container mt-5 p-3 text-light c-grid"> 						 
+			  <div class="row mt-2"> 
+			    <div class="col-sm-12 col-md-12 col-xl-4 ml-auto">
+			      <form >
+			                <!-- Input Group Starts -->
+			        <div class="">
+			          <div class="form-group row">
+			            <label for="Name1">Name</label>
+			            <input type="Name" class="form-control" id="Name1" placeholder="Juan Dela Cruz">
+			          </div>
+			          <div class="form-group row">
+			            <label for="exampleFormControlInput1">Email address</label>
+			            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="JuanDela@gmail">
+			          </div>  <div class="form-group row">
+			            <label for="contact-number">Contact Number</label>
+			            <input type="contact-number" class="form-control" id="contact-number" placeholder="+6391234567">
+			          </div>
+			        </div> 
+			        <!-- Input Group ends -->      
+			        <!-- Message area -->
+			        <div>
+			          <div class="form-group row">
+			            <label for="Message1">Message</label>
+			            <textarea class="form-control" id="Message1" rows="5"></textarea>
+			          </div>
+			        </div>  
+			        <!-- Message area Ends -->
+			        <!-- submit buttons starts -->
+			       <button type="button" class="btn btn-secondary text-light" data-toggle="modal" data-target="#staticBackdrop">
+			         Send Email
+			       </button>
+
+			        <!-- submit buttons starts -->
+			      </form>
+			    </div>
+
+			    <!-- map section -->
+			    <div class="col-sm-12 col-md-12 col-xl-4 min-vh-50 mr-lg-auto pt-4">
+
+			    	<div class="mapouter">
+			    		<div class="gmap_canvas">
+			    			<iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=400&amp;height=400&amp;hl=en&amp;q=silang, cavite&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+			    			<a href="https://capcuttemplate.org/">Capcut Template</a>
+			    		</div>
+			    		
+			    	</div>						    	
+			    </div>
+			    <!-- map section -->
+			  </div>
+			</div>
+
+			<!-- Contact Form End -->
+
+			<!-- Modal Component -->
+			<!-- Modal -->
+				<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="staticBackdropLabel">Thank you for contacting me!</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        Message has been sent.
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>				 
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			<!-- Modal -->
+		</div>
+	</div>
+
+</body>
+</html>
