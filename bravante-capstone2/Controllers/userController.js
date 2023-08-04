@@ -95,3 +95,15 @@ return UserModel.findById(data.userId).then(result => {
     return result;
     });
 };
+
+module.exports.getAllUsers =(data)=> {
+
+    return (
+        UserModel.find().then(res => {
+            res.password = "";
+            return res
+        })
+
+    )
+
+}

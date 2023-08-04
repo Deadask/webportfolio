@@ -61,6 +61,16 @@ router.get("/details", auth.verify, (req, res) => {
     userController.getProfile(data).then(resultFromController => res.send(resultFromController));
 });
 
+router.get("/all", auth.verify, (req, res) => {
+    const data = {
+        isAdmin: auth.decode(req.headers.authorization).isAdmin,
+        userId: auth.decode(req.headers.authorization).id
+      }
+
+    userController.getAllUsers(data).then(resultFromController => res.send(resultFromController));
+
+})
+
 
 
 

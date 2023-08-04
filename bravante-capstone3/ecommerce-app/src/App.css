@@ -43,3 +43,7 @@
 .colBg-secondary {
   background-color: lightslategray;
 }
+
+.cardHeight {
+  heigh: 10rem
+}

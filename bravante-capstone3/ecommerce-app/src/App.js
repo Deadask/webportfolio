@@ -12,6 +12,8 @@ import AddProduct from './components/AddProduct';
 import Error from './pages/Error';
 import ProductView from './components/ProductView';
 import ViewCart from './pages/ViewCart';
+import Users from './pages/Users';
+import UserView from './components/UserView';
 
 import './App.css';
 
@@ -74,6 +76,8 @@ function App() {
             <Route path="/products/:productId" element={<ProductView />} />
             <Route path="/*" element={<Error />} />
             <Route path="/cart/view" element={<ViewCart />} />
+            <Route path="/users/all" element={<Users />} />
+            <Route path="/users/:usersId/view" element={<UserView />} />
           </Routes>
         </Container>
       </Router>

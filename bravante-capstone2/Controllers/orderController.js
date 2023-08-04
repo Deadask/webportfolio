@@ -1,87 +1,109 @@
 const OrderModel = require('../Models/OrderModel');
+const CartModel = require('../Models/CartModel.js')
 
 const ProductModel = require('../Models/ProductModel');
 
 
 // controller for order creation
  module.exports.createOrder = async (data) => {
-    //checks if user is admin or not
-    if(data.isAdmin == false) {
-        //checks if user has existing order
-        let doesUserHaveOrder = await OrderModel.find({userId : data.userId}).then(result => {
-            
-            if (result.length >0) {
-                return true
-            } else {
-                return false
-            }
+    if (data.isAdmin === false) {
+        console.log('User Not Admin')
+        //determine if creating a new db entry or push to existing
+        let pathCheck = false;
+        let checkUserData = await OrderModel.findOne({userId: data.userId}).then(res=>{
+            console.log(`UserData:`)
+            console.log(res)
+            return res;
         })
-        
-        if (doesUserHaveOrder){
-            let subTotal = await ProductModel.findById(data.productId).then(result => {
-                let subTotalAmount = result.price * data.quantity
-                return subTotalAmount;
-                });
-            let newProductOrder = {
-                productId: data.productId,
-                quantity: data.quantity,
-                subtotal: subTotal
-            }
-            let updateOrderProducts = await OrderModel.findOne({userId : data.userId}).then(result => {
-                result.products.push(newProductOrder);
-                result.totalAmount = result.totalAmount+subTotal;
-                result.purchasedOn = new Date();
+        console.log("CheckUserData: ")
+        console.log(checkUserData);
 
-                return result.save().then((order, err) =>{
-                    if (err) {
-                        return false;
-                    } else {
-                        return true
-                    }
-                })
+        if (checkUserData) {
+            pathCheck = false;
+        } else {
+            pathCheck = true;
+        }
+
+        //if (pathCheck) {
+            let cartOrder = await CartModel.findOne({userId: data.userId}).then(res=> {
+                console.log ("cartData");
+                console.log(res);
+                return res
             })
 
-            if (updateOrderProducts && doesUserHaveOrder) {
-                return true;
-            } else {
-                return false
-            }
-           
-
-        } else {
-            let subTotal = await ProductModel.findById(data.productId).then(result => {
-                let subTotalAmount = result.price * data.quantity
-                return subTotalAmount;
-                });
-                
-    
-                let newOrder = new OrderModel({
+            let newOrder = new OrderModel({
                     userId: data.userId,
-                    products: {
-                        productId:data.productId,
-                        quantity:data.quantity,
-                        subtotal: subTotal,
-                    },
-                    totalAmount: subTotal
+                    products: cartOrder.cart,
+                    total: cartOrder.total,
                 })
-    
-                return newOrder.save().then((order, err) =>{
-                    if(err) {
-                        return false;
+
+                return newOrder.save().then((user,x)=>{
+                    if (x) {
+                        console.log (`add cart error: ${x}`);
+                        return false 
                     } else {
-                        console.log("created from doesUserHaveOrder: false")
-                        return true;
+                        console.log (newOrder)
+                        return true
                     }
-                })
-        }
+                });
+            return true
+        //} 
+        /*else {
+            // get product data
+            let getProduct = await ProductModel.findById(data.productId).then(result=> result)
+            // Check if the item already exists in the cart.
+            let checkCart = await CartModel.findOne({userId:data.userId}).then(cart=>{
+
+                return cart
+            })
+            console.log("checkCart");
+            console.log(checkCart);
             
-    }
+            const existingIndex = checkCart.cart.findIndex((product)=> product.productId === data.productId);
+            console.log("existingIndex")
+            console.log(existingIndex)
 
-    let message = Promise.resolve("Please use non-admin accounts to access")
+            // If the item exists, update the quantity.
+            if (existingIndex !== -1) {
+                checkCart.cart[existingIndex].quantity += data.quantity;
+            } else {
+                // If the item does not exist, add it to the cart.
+                checkCart.cart.push({
+                    productId: data.productId,
+                    name: getProduct.name,
+                    quantity: data.quantity,
+                    price: getProduct.price
+                });
+            }
 
+            // Calculate the subtotal and total for the cart.
+            for (const cart of checkCart.cart) {
+                cart.subTotal = cart.price * cart.quantity;
+            }
+            const total = checkCart.cart.reduce((acc, cart)=>{
+                return acc + cart.subTotal;
+            }, 0);          
+            
+            checkCart.total =  total
+            console.log("updated checkCart")
+            console.log(checkCart)
+
+            return checkCart.save().then((updateCart,x)=>{
+                if (x) {
+                    return false
+                } else {
+                    console.log(`cart ${data.userId} updated`)
+                    return true
+                }
+
+            })
+        };*/
+    };
+
+    let message = Promise.resolve("User must be non-Admin to access this.")
     return message.then((value) => {
         return {value}
-    });   
+    });  
  }
 
  module.exports.viewAllOrders = (data) => {

@@ -1,14 +1,17 @@
 
 import { useEffect, useState, useContext } from "react";
-import {Navigate, Link} from 'react-router-dom'
+import {useNavigate, Link} from 'react-router-dom'
 import UserContext from '../UserContext';
+import Swal from 'sweetalert2'
+import Error from "./Error";
 
 import { Container, Row, Col, Card, Button} from 'react-bootstrap'
 
 
 
-export default function ViewCart  ()  {   
-         
+export default function ViewCart  ()  {  
+    const {user} = useContext(UserContext) 
+    const navigate = useNavigate();
         const [rows, setRows] = useState([]);
         const [total, setTotal] = useState()
         useEffect(()=>{
@@ -33,8 +36,41 @@ export default function ViewCart  ()  {
             )
         },[])
         
+        const checkOut=(e)=> {
+            e.preventDefault();
+            fetch(`${process.env.REACT_APP_API_URL}/orders/create`, {
+                method: 'PATCH',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`,
+                }
+            }).then(res => res.json())
+            .then(data => {
+                if(data === true) {
+                   
+                    Swal.fire({
+                        title: "Order Created",
+                        icon: "success",
+                        text: "Thank you for your purchase"
+                    })
+    
+                    navigate("/products/all");
+    
+                } else {
+    
+                    Swal.fire({
+                        title: "Something went wrong",
+                        icon: "error",
+                        text: "Please, try again."
+                    });
+                }
+            })
+
+
+        }
+
     return (
-        
+        <>
+        {(user.id)? 
                 <Row className='text-center'>
                     <Col className='mx-0 '></Col>
                     <Col className='border-light mx-0'>
@@ -56,13 +92,17 @@ export default function ViewCart  ()  {
                                 </Row>
                             </Card.Body>
                             <Card.Footer>
-                                <Button className='rounded-pill p-3'>Check Out</Button>
+                                <Button className='rounded-pill p-3' onClick={checkOut}>Check Out</Button>
                             </Card.Footer>
                         </Card>
                     </Col>
                     <Col className='mx-0 '></Col>
                     
                 </Row>
+        :
+            <Error/>
+        }
+        </>
             
         )
 }

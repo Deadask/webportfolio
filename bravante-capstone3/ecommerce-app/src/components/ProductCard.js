@@ -13,8 +13,8 @@ const {name, description, price, _id, quantity, date} = product;
 return (
     <>
     
-        <Col className="col-xs-12 col-4 mt-2 p-1 ">
-            <Card className="p-0">
+        <Col className="col-12 col-md-4 mt-2 p-1 ">
+            <Card className="p-0" >
                 <Card.Body>
                     <Card.Img classvariant="top" src={sample} />
                     <Card.Title>{name}</Card.Title>

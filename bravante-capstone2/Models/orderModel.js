@@ -3,32 +3,39 @@ const mongoose = require('mongoose');
 const OrderModel = new mongoose.Schema({
     userId: {
         type: String,
-        required: [true, "User Id is required"]
+        required: [true, 'user id is required']
     },
+    
+    cart: [{
+        productId: {
+            type: String,
+            required: [true , 'productId is required']
+        },
 
-    products:[ 
-        {
-        
-            productId: {
-                type: String,
-                required: [true, "Product Id is required"],
-            },
-            quantity: {
-                type: Number,
-                required: [true, "Quantity is required"],
-                default: 0
-            },
-            subtotal: {
-                type: Number,
-                default: 0
-            }
+        name: {
+            type: String,
+            required: [true, 'name is required']
+        },
+
+        price: {
+            type: Number,
+            required: [true, 'price is required']
+        },
+
+        quantity: {
+            type: Number,
+            required: [true, 'quantity is required']
+        },
+
+        subTotal: {
+            type: Number,
+            default: 0
         }
-        
-    ],
 
-    totalAmount: {
+    }],
+
+    total: {
         type: Number,
-        required: [true, "Total Amount is required"],
         default: 0
     },
 
