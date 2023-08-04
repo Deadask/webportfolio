@@ -1,5 +1,5 @@
 const CartModel = require ("../Models/CartModel.js");
-const ProductModel = require ("../Models/ProductModel")
+const ProductModel = require ("../Models/productModel")
 
 module.exports.veiwCart = (data) => {
 
@@ -103,16 +103,8 @@ module.exports.addCart = async (data) => {
 			}
 			const total = checkCart.cart.reduce((acc, cart)=>{
 				return acc + cart.subTotal;
-			}, 0);
-
-			console.log("updated checkCart")
-			console.log(checkCart)
-			// checkCart.cart = checkCart.cart.map((basket)=>{
-			// 	return {
-			// 		...basket,
-			// 		subTotal,
-			// 	};
-			// });
+			}, 0);			
+			
 			checkCart.total =  total
 			console.log("updated checkCart")
 			console.log(checkCart)
