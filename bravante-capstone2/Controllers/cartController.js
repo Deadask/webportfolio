@@ -1,5 +1,5 @@
 const CartModel = require ("../Models/CartModel.js");
-const ProductModel = require ("../Models/ProductModel")
+const ProductModel = require ("../Models/productModel")
 
 module.exports.veiwCart = (data) => {
 
