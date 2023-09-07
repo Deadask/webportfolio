@@ -8,12 +8,45 @@
 
 /*Custom CSS classes*/
 
+.center {
+	margin: auto;
+	width: 50%;
+	padding: 10px;
+}
+
+.border-round{
+	border-radius: 15px;
+}
+.fit-image{
+	width: 75%;
+}
+
+
+
+.c-img-fit {
+    width: 350px; /* You can set the dimensions to whatever you want */
+    height: 250px;
+    object-fit: contain; 
+}
+
 .c-w-30 {
 	width: 30vw;
 }
 
 .c-h-400 {
 	height: 400px ;
+}
+
+
+
+.row {
+    display: table;
+}
+
+.row [class*="col-"] {
+    float: none;
+    display: table-cell;
+    vertical-align: top;
 }
 
 .c-h-200 {
@@ -50,9 +83,7 @@
 	height:400px;
 }
 
-.no-overflow {
-	overflow: hidden;
-}
+
 
 html, body {
     max-width: 100%;
@@ -64,11 +95,27 @@ html, body {
 }
 
 /* automatic grid adjustment start */
-.c-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+
+
+@media (min-width: 900px) {
+	.c-grid {
+		
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(500px, 100%), 2fr)), important;
+	}
+
+	
+}
+
+@media   (min-width: 600px) {
+	.c-grid {
+		--column-count: 1;
+		grid-template-columns: repeat(var(--column-count), 1fr);
+	}
 }
 /* automatic grid adjustment end */
+
+
 
 
 #project-description {
@@ -76,22 +123,17 @@ html, body {
 }
 
 /*Adjust img size to fit container*/
-.c-img-fit {
-	width: 100%;
-	object-fit: contain;
-
-}
 
 /*navbar css Start*/
 	.hoverable {
-	  display: inline-block;
-	  backface-visibility: hidden;
-	  vertical-align: middle;
-	  position: relative;
-	  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-	  tranform: translateZ(0);
-	  transition-duration: 0.3s;
-	  transition-property: transform;
+		display: inline-block;
+		backface-visibility: hidden;
+		vertical-align: middle;
+		position: relative;
+		box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+		transform: translateZ(0);
+		transition-duration: 0.3s;
+		transition-property: transform;
 	}
 
 	.hoverable:before {
@@ -159,6 +201,3 @@ html, body {
 	top: 0;
 }
 
-.c-background {
-	background-image: url(./images/bg-ckt.png);
-}
